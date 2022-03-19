@@ -61,9 +61,9 @@ void turn(enum directions dir) {
 
 // changing robot's state using it's current state 
 void make_decision(String robot_status) {
-  if (robot_status == "110") {
+  if (robot_status == "110" || robot_status == "100") {
     turn(Right);
-  } else if (robot_status == "011") {
+  } else if (robot_status == "011" || robot_status == "001") {
     turn(Left);
   } else {
     turn(Straight);
