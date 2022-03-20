@@ -12,10 +12,10 @@ const int TIMER_DURATION = 5000;
 #define SOUND_VELOCITY 0.034
 
 long duration;
-float distanceCm;
-bool targetDetected = false;
-bool isOpen = false;
-int timerMillies = -1;
+float distance_in_cm;
+bool is_target_detected = false;
+bool is_open = false;
+int timer_millies = -1;
 int pos = 0;
 
 void setup() {
@@ -28,7 +28,33 @@ void setup() {
 }
 
 void loop() {
-  
+  distance_in_cm = get_distance_in_cm();
+
+  if (distance_in_cm > 10 ) { // no object was detected closer than 10cm
+    is_target_detected = false;
+    if (is_open) {
+      close_the_door();
+    }
+  } else { // an object was detected closer than 10cm
+    if (!is_target_detected) { // the object was appeared recently
+      Serial.println("the object was appeared recently");
+      is_target_detected = true;
+      timer_millies = millis();
+    } else {
+      if (millis() > timer_millies + TIMER_DURATION) { // the timer has been finished and we can open the door
+        if (!is_open) {
+          open_the_door();
+        }
+        
+      } else { // we should wait for timer...
+        wait_for_timer();
+      }
+    }
+  }
+  digitalWrite(LED_PIN, is_target_detected ? HIGH : LOW);
+}
+
+float get_distance_in_cm() {
   // Clears the TRIGGER_PIN
   digitalWrite(TRIGGER_PIN, LOW);
   delayMicroseconds(2);
@@ -40,43 +66,28 @@ void loop() {
   // Reads the ECHO_PIN, returns the sound wave travel time in microseconds
   duration = pulseIn(ECHO_PIN, HIGH);
 
-  // Calculate the distance
-  distanceCm = duration * SOUND_VELOCITY / 2;
+  // return the distance
+  return duration * SOUND_VELOCITY / 2;
+}
 
-  if (distanceCm > 10 ) { // no object was detected closer than 10cm
-    targetDetected = false;
-    
-    if (isOpen) {
-      Serial.println("closing the door");
-      for (pos = 180; pos >= 0; pos -= 1) {
-        myservo.write(pos);
-      }
-      isOpen = false;
-    }
-
-  } else { // an object was detected closer than 10cm
-    if (!targetDetected) { // the object was appeared recently
-      Serial.println("the object was appeared recently");
-      targetDetected = true;
-      timerMillies = millis();
-    } else {
-      
-      if (millis() > timerMillies + TIMER_DURATION) { // the timer has been finished and we can open the door
-        
-        if (!isOpen) {
-          Serial.println("the timer has been finished and we can open the door");
-          for (pos = 0; pos <= 180; pos += 1) { // goes from 0 degrees to 180 degrees
-            myservo.write(pos);
-          }
-          isOpen = true;
-        }
-        
-      } else { // we should wait for timer...
-        Serial.print("waiting for timer...(");
-        Serial.print(TIMER_DURATION - (millis() - timerMillies));
-        Serial.println("ms remaining)");
-      }
-    }
+void close_the_door() {
+  Serial.println("closing the door");
+  for (pos = 180; pos >= 0; pos -= 1) {
+    myservo.write(pos);
   }
-  digitalWrite(LED_PIN, targetDetected ? HIGH : LOW);
+  is_open = false;
+}
+
+void open_the_door() {
+  Serial.println("the timer has been finished and we can open the door");
+  for (pos = 0; pos <= 180; pos += 1) { // goes from 0 degrees to 180 degrees
+    myservo.write(pos);
+  }
+  is_open = true;
+}
+
+void wait_for_timer() {
+  Serial.print("waiting for timer...(");
+  Serial.print(TIMER_DURATION - (millis() - timer_millies));
+  Serial.println("ms remaining)");
 }
