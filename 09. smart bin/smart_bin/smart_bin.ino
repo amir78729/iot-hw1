@@ -29,19 +29,25 @@ void setup() {
 
 void loop() {
   distance_in_cm = get_distance_in_cm();
-
+  
   if (distance_in_cm > 10 ) { // no object was detected closer than 10cm
     is_target_detected = false;
     if (is_open) {
       close_the_door();
     }
+    
   } else { // an object was detected closer than 10cm
+    
     if (!is_target_detected) { // the object was appeared recently
+      
       Serial.println("the object was appeared recently");
       is_target_detected = true;
       timer_millies = millis();
+      
     } else {
+      
       if (millis() > timer_millies + TIMER_DURATION) { // the timer has been finished and we can open the door
+        
         if (!is_open) {
           open_the_door();
         }
@@ -55,6 +61,7 @@ void loop() {
 }
 
 float get_distance_in_cm() {
+  
   // Clears the TRIGGER_PIN
   digitalWrite(TRIGGER_PIN, LOW);
   delayMicroseconds(2);
