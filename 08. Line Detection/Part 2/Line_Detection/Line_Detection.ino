@@ -6,9 +6,6 @@ const int LDR_PIN = 16; // assiging LDR pin: D0
 const int LDR_R_PIN = 5; // assiging LDR pin: D1
 const int LDR_L_PIN = 4; // assiging LDR pin: D2
 
-//const int LED_PIN = 0; // assiging LED pin: D3
-//const int BUZZER_PIN = 4; // assiging buzzer pin: D2
-
 const int BRIGHTNESS_THRESHHOLD = 40;
 const int SERVE_MOVE_RIGHT_DEGREE = 30;
 const int SERVE_MOVE_LEFT_DEGREE = -30;
