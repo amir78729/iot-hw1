@@ -322,7 +322,6 @@ void buzz() {
   digitalWrite(BUZZER_PIN, LOW);
 }
 
-
 void print_current_time() {//
   Serial.println("----------------------------------------------------------------------------------");
   Serial.print("[");
