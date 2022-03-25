@@ -8,10 +8,9 @@ Amirhossein Alibakhshi - Negin Hajisobhani
  
 </div>
 
----
 
 <details>
- <summary>Button</summary>
+ <summary>🔘 Button</summary>
  
 <br/>
  
@@ -23,12 +22,13 @@ Amirhossein Alibakhshi - Negin Hajisobhani
  
  <img src="https://github.com/amir78729/iot-hw1/blob/main/07.%20Button/Button/button.jpg" alt="alt" width="100%">
  
+  ---
+  
 </details>
 
----
 
 <details>
- <summary>Line Detection</summary>
+ <summary>🔎 Line Detection</summary>
  
 <br/>
  
@@ -54,13 +54,16 @@ Amirhossein Alibakhshi - Negin Hajisobhani
  
  <img src="https://github.com/amir78729/iot-hw1/blob/main/08.%20Line%20Detection/Part%202/Line_Detection/line%20detection%202.jpg" alt="alt" width="100%">
  
- 
+  
+  ---
+  
 </details>
 
----
+
+
 
 <details>
- <summary>Smart Bin</summary>
+ <summary>🚮 Smart Bin</summary>
  
 <br/>
  
@@ -71,14 +74,16 @@ Amirhossein Alibakhshi - Negin Hajisobhani
  <br/>
  
  <img src="https://github.com/amir78729/iot-hw1/blob/main/09.%20smart%20bin/smart_bin/smart%20bin.jpg" alt="alt" width="100%">
- 
+  
+  ---
+  
 </details>
 
 
----
+
 
 <details>
- <summary>Screen Light</summary>
+ <summary>🔦 Screen Light</summary>
  
 <br/>
  
@@ -89,13 +94,16 @@ Amirhossein Alibakhshi - Negin Hajisobhani
  <br/>
  
  <img src="https://github.com/amir78729/iot-hw1/blob/main/10.%20screen%20Light/screen_Light/screen%20light.jpg" alt="alt" width="100%">
- 
+  
+  ---
+  
 </details>
 
----
+
+
 
 <details>
- <summary>Attendance System</summary>
+ <summary>⛔ Attendance System</summary>
  
 <br/>
  
@@ -106,6 +114,8 @@ Amirhossein Alibakhshi - Negin Hajisobhani
  <br/>
  
  <img src="https://github.com/amir78729/iot-hw1/blob/main/11.%20attendance%20system/attendence_system/attendance%20system.jpg" alt="alt" width="100%">
- 
+  
+  ---
+  
 </details>
 
