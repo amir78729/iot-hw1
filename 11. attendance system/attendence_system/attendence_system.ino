@@ -7,6 +7,13 @@
 #define SS_PIN D8
 #define RST_PIN D0
 
+bool isActive = false; // a boolean variable for saving the LED's state
+
+
+const int LDR_PIN = A0; // assiging LDR pin: A0
+const int LED_PIN = 5;  // assiging LED pin: D1
+
+
 #define CLASS_TIME_IN_MINUTE 15
 #define ENTERANCE_DEADLINE_IN_MINUTE 10
 
@@ -26,8 +33,9 @@ unsigned long enterance_deadline;
 unsigned long end_time;
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
   SPI.begin(); // Init SPI bus
+  pinMode(LED_PIN, OUTPUT);
 
   rfid.PCD_Init(); // Init MFRC522
   Serial.println();
@@ -49,6 +57,25 @@ void setup() {
 }
 void loop() {
   timeClient.update();
+
+  int sensor_value = analogRead(LDR_PIN); // reading the LDR value
+  Serial.print("  \tLED is ");
+  Serial.print(isActive ? "ON" : "OFF");
+  Serial.print("\t");
+  if (sensor_value < 100) { // putting the LDR in a dark place...
+    Serial.print("*STATUS CHANGED!!*");
+    isActive = !isActive;
+    digitalWrite(LED_PIN, isActive ? HIGH : LOW); // changing the state of LED
+    delay(1000); // waiting for the LDR to be in a lighter place
+  }
+  Serial.println("");
+  delay(200);
+
+  if (isActive) {
+    start_class();
+  }
+
+
   // Reset the loop if no new card present on the sensor/reader. This saves the entire process when idle.
   if ( ! rfid.PICC_IsNewCardPresent())
     return;
@@ -70,17 +97,8 @@ void loop() {
       rfid.uid.uidByte[2] != nuidPICC[2] ||
       rfid.uid.uidByte[3] != nuidPICC[3] ) {
 
-    start_time = timeClient.getEpochTime();
-    enterance_deadline = start_time + 60000 * ENTERANCE_DEADLINE_IN_MINUTE;
-    end_time = start_time + 60000 * CLASS_TIME_IN_MINUTE;
-
-    Serial.println(start_time);
-    Serial.println(enterance_deadline);
-    Serial.println(end_time);
-
-    print_class_time_info();
-
-    //    Serial.println(epochTime);
+    
+    
     Serial.println(F("A new card has been detected."));
     // Store NUID into nuidPICC array
     for (byte i = 0; i < 4; i++) {
@@ -150,4 +168,11 @@ void print_class_time_info () {
   get_time_after_x_sec(hours, minutes, seconds, 60 * ENTERANCE_DEADLINE_IN_MINUTE);
   Serial.print("- End Time: ");
   get_time_after_x_sec(hours, minutes, seconds, 60 * CLASS_TIME_IN_MINUTE);
+}
+
+void start_class() {
+  start_time = timeClient.getEpochTime();
+  enterance_deadline = start_time + 60000 * ENTERANCE_DEADLINE_IN_MINUTE;
+  end_time = start_time + 60000 * CLASS_TIME_IN_MINUTE;
+  print_class_time_info();
 }
