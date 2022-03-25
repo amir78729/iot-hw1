@@ -92,3 +92,20 @@ Amirhossein Alibakhshi - Negin Hajisobhani
  
 </details>
 
+---
+
+<details>
+ <summary>Attendance System</summary>
+ 
+<br/>
+ 
+ [💻 Code](https://github.com/amir78729/iot-hw1/blob/main/11.%20attendance%20system/attendence_system/attendence_system.ino)
+ 
+ 🖼️ Image: 
+ 
+ <br/>
+ 
+ <img src="https://github.com/amir78729/iot-hw1/blob/main/11.%20attendance%20system/attendence_system/attendance%20system.jpg" alt="alt" width="100%">
+ 
+</details>
+
