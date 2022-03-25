@@ -59,14 +59,12 @@ void waiting_for_studants(void);
 void print_tag_information(String);
 void print_hex(byte*, byte);
 void print_decimal(byte*, byte);
-String get_student_tag(byte*, byte);
-String get_student_name_by_tag(String);
 void get_time_after_x_sec(int, int, int, int);
 void validate_attendance(String);
 void open_door_for_students(String);
 void buzz(void);
-
-
+String get_student_tag(byte*, byte);
+String get_student_name_by_tag(String);
 
 void setup() {
   pinMode(LED_PIN, OUTPUT);
@@ -107,13 +105,6 @@ void loop() {
   check_instructor_attendance();
   check_class_time();
   waiting_for_studants();
-}
-
-void print_current_time() {//
-  Serial.println("----------------------------------------------------------------------------------");
-  Serial.print("[");
-  Serial.print(timeClient.getFormattedTime());
-  Serial.print("] ");
 }
 
 void check_instructor_attendance() {
@@ -160,7 +151,26 @@ void print_class_time_info () {
   Serial.print("  - End Time   : ");
   get_time_after_x_sec(hours, minutes, seconds, 1 * CLASS_TIME_IN_MINUTE);
 }
-//-------------------------
+
+void get_time_after_x_sec(int hour, int minute, int second, int offset_in_seconds) {
+  second += offset_in_seconds;
+  if (second >= 60) {
+    minute += second / 60;
+    second = second % 60;
+  }
+  if (minute >= 60) {
+    hour += minute / 60;
+    minute = minute % 60;
+  }
+  if (hour >= 24) {
+    hour = hour % 24;
+  }
+  Serial.print(hour);
+  Serial.print(":");
+  Serial.print(minute);
+  Serial.print(":");
+  Serial.println(second);
+}
 
 void check_class_time() {
   if (is_class_started) {
@@ -186,8 +196,6 @@ void print_class_result() {
     Serial.println(is_student_present[i] ? "PRESENT" : "ABSENT");
   }
 }
-
-//------------
 
 void waiting_for_studants() {
   // Reset the loop if no new card present on the sensor/reader. This saves the entire process when idle.
@@ -279,28 +287,6 @@ String get_student_name_by_tag(String tag) {
   return "Unknown Student";
 }
 
-void get_time_after_x_sec(int hour, int minute, int second, int offset_in_seconds) {
-  second += offset_in_seconds;
-  if (second >= 60) {
-    minute += second / 60;
-    second = second % 60;
-  }
-  if (minute >= 60) {
-    hour += minute / 60;
-    minute = minute % 60;
-  }
-  if (hour >= 24) {
-    hour = hour % 24;
-  }
-  Serial.print(hour);
-  Serial.print(":");
-  Serial.print(minute);
-  Serial.print(":");
-  Serial.println(second);
-}
-
-
-
 void validate_attendance(String student_tag) {
   if (is_deadline_missed) {
     Serial.print("Sorry, you can not enter the class because ");
@@ -334,4 +320,12 @@ void buzz() {
   digitalWrite(BUZZER_PIN, HIGH);
   delay(1000); // active the buzzer for 1 second
   digitalWrite(BUZZER_PIN, LOW);
+}
+
+
+void print_current_time() {//
+  Serial.println("----------------------------------------------------------------------------------");
+  Serial.print("[");
+  Serial.print(timeClient.getFormattedTime());
+  Serial.print("] ");
 }
