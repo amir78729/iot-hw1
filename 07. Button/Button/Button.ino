@@ -15,7 +15,7 @@ void loop() {
   Serial.print("  \tLED is ");
   Serial.print(isActive ? "ON" : "OFF");
   Serial.print("\t");
-  if (sensor_value > 800) { // putting the LDR in a dark place...
+  if (sensor_value > 900) { // putting the LDR in a dark place...
     Serial.print("*STATUS CHANGED!!*");
     isActive = !isActive;
     digitalWrite(LED_PIN, isActive ? HIGH : LOW); // changing the state of LED

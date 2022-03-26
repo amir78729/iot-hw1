@@ -45,8 +45,8 @@ byte nuidPICC[4];
 // informations and instances for connecting to the internet
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "pool.ntp.org");
-const char *ssid     = "Dellink";
-const char *password = "wtkh-daah-y8bj";
+const char *ssid     = "<SSID>";
+const char *password = "<PASSWORD>";
 
 // function prototypes
 void check_instructor_attendance(void);
