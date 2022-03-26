@@ -3,9 +3,12 @@ void setup() {
 }
 
 void loop() {
-  Serial.println("+------------------------+");
-  Serial.println("| Amirhossein Alibakhshi |");
-  Serial.println("|      ID : 9731096      |");
-  Serial.println("+------------------------+");
-  delay(1000);
+  Serial.println("+----------------+");
+  Serial.println("| A.  Alibakhshi |");
+  Serial.println("|  ID : 9731096  |");
+  Serial.println("+----------------+");
+  Serial.println("| N. Hajisobhani |");
+  Serial.println("|  ID : 9731078  |");
+  Serial.println("+----------------+\n\n");
+  delay(5000);
 }
