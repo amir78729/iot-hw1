@@ -28,10 +28,10 @@ bool is_deadline_missed = false;
 bool is_class_ended = false;
 
 // pins
-const int SERVO_PIN = D2; // assiging servo pin: D2
+const int SERVO_PIN = 4; // assiging servo pin: D2
 const int LDR_PIN = A0; // assiging LDR pin: A0
-const int LED_PIN = D1;  // assiging LED pin: D1
-const int BUZZER_PIN = D3; // assiging buzzer pin: D3
+const int LED_PIN = 5;  // assiging LED pin: D1
+const int BUZZER_PIN = 0; // assiging buzzer pin: D3
 const int SS_PIN = D8; // assiging RFID SS pin: D8
 const int RST_PIN = D0; // assiging RFID RST pin: D0
 
@@ -108,7 +108,7 @@ void loop() {
 }
 
 void check_instructor_attendance() {
-  bool is_button_pressed = analogRead(LDR_PIN) > 900;
+  bool is_button_pressed = analogRead(LDR_PIN) > 800;
   if (is_button_pressed) {
     is_instructor_in_class = !is_instructor_in_class;
     digitalWrite(LED_PIN, is_instructor_in_class ? HIGH : LOW);
@@ -132,8 +132,8 @@ void start_class() {
   is_class_started = true;
   start_time = timeClient.getEpochTime();
   // TODO: Convert 1 to 60
-  enterance_deadline = start_time + 1 * ENTERANCE_DEADLINE_IN_MINUTE;
-  end_time = start_time + 1 * CLASS_TIME_IN_MINUTE;
+  enterance_deadline = start_time + 1.5 * ENTERANCE_DEADLINE_IN_MINUTE;
+  end_time = start_time + 1.5 * CLASS_TIME_IN_MINUTE;
   print_class_time_info();
 }
 
@@ -147,9 +147,9 @@ void print_class_time_info () {
   Serial.println(timeClient.getFormattedTime());
   Serial.print("  - Deadline   : ");
   // TODO: convert 1 to 60
-  get_time_after_x_sec(hours, minutes, seconds, 1 * ENTERANCE_DEADLINE_IN_MINUTE);
+  get_time_after_x_sec(hours, minutes, seconds, 1.5 * ENTERANCE_DEADLINE_IN_MINUTE);
   Serial.print("  - End Time   : ");
-  get_time_after_x_sec(hours, minutes, seconds, 1 * CLASS_TIME_IN_MINUTE);
+  get_time_after_x_sec(hours, minutes, seconds, 1.5 * CLASS_TIME_IN_MINUTE);
 }
 
 void get_time_after_x_sec(int hour, int minute, int second, int offset_in_seconds) {
@@ -214,14 +214,7 @@ void waiting_for_studants() {
     delay(500);
     return;
   }
-  //  if (rfid.uid.uidByte[0] != nuidPICC[0] ||
-  //      rfid.uid.uidByte[1] != nuidPICC[1] ||
-  //      rfid.uid.uidByte[2] != nuidPICC[2] ||
-  //      rfid.uid.uidByte[3] != nuidPICC[3] ) {
-  //    Serial.println(F("A new card has been detected."));
-  //  } else {
-  //    Serial.println(F("Card read previously."));
-  //  }
+  
   validate_attendance(student_tag);
 
   // Halt PICC
