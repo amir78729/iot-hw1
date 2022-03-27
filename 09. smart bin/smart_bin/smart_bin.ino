@@ -3,8 +3,8 @@
 Servo myservo;  // create servo object to control a servo
 const int TRIGGER_PIN = 12; // assiging trigger pin for ultrasonic sensor: D6
 const int ECHO_PIN = 14; // assiging echo pin for ultrasonic sensor: D5
-const int SERVO_PIN = 5; // assiging servo pin: D1
-const int LED_PIN = 4; // assiging servo pin: D2
+const int SERVO_PIN = 0; // assiging servo pin: D3
+const int LED_PIN = 2; // assiging servo pin: D4
 
 const int TIMER_DURATION = 5000;
 
