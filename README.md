@@ -67,7 +67,7 @@ Amirhossein Alibakhshi - Negin Hajisobhani
  
 <br/>
  
- [💻 Code](https://github.com/amir78729/iot-hw1/blob/main/09.%20smart%20bin/smart_bin/smart%20bin.ino)
+ [💻 Code](https://github.com/amir78729/iot-hw1/blob/main/09.%20smart%20bin/smart_bin/smart_bin.ino)
  
  🖼️ Image: 
  
