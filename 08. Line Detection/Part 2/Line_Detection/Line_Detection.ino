@@ -6,15 +6,11 @@ const int LDR_PIN = 16; // assiging LDR pin: D0
 const int LDR_R_PIN = 5; // assiging LDR pin: D1
 const int LDR_L_PIN = 4; // assiging LDR pin: D2
 
-const int BRIGHTNESS_THRESHHOLD = 40;
 const int SERVE_MOVE_RIGHT_DEGREE = 30;
 const int SERVE_MOVE_LEFT_DEGREE = -30;
 const int SERVE_MOVE_STRAIGHT_DEGREE = 0;
 
 enum directions{Left, Straight, Right};
-
-
-bool isActive = false;
 
 void setup() {
   myservo.attach(SERVO_PIN);  // attaching servo to the servo object
@@ -22,24 +18,9 @@ void setup() {
   pinMode(LDR_PIN, INPUT);
   pinMode(LDR_R_PIN, INPUT);
   pinMode(LDR_L_PIN, INPUT);
-
-//
-//  pinMode(LED_PIN, OUTPUT);
-//  pinMode(BUZZER_PIN, OUTPUT);
 }
 
 void loop() {
-//  Serial.print("Serial.println(analogRead(LDR_PIN)): ");
-//  Serial.println(analogRead(LDR_PIN));
-//  Serial.print("Serial.println(digitalRead(LDR_PIN)): ");
-//  Serial.println(digitalRead(LDR_PIN));
-//  delay(1000);
-//  int sensor_value = map(analogRead(LDR_PIN), 4, 1024, 0, 100); // mapping analog value between [0, 100]
-//  Serial.print("input value: ");
-//  Serial.println(sensor_value);
-//  digitalWrite(BUZZER_PIN, sensor_value > BRIGHTNESS_THRESHHOLD ? HIGH : LOW); // activate buzzer if the line was not detected
-//  digitalWrite(LED_PIN, sensor_value <= BRIGHTNESS_THRESHHOLD ? HIGH : LOW); // activate LED if the line was detected
-//  Serial.println(digitalRead(LDR_PIN));
   String robot_status = get_robot_status();
   make_decision(robot_status);
   delay(200);
